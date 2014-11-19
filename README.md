@@ -1,4 +1,10 @@
 test-grid-base
 ==============
 
-test grid and base styles
+Simple Grid and Base layout including:
+* normalize.css
+* grid
+* base
+* typography
+
+
