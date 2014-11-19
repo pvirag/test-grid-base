@@ -1,0 +1,174 @@
+/**
+ * Reset box sizing
+ */
+
+html {
+    box-sizing: border-box;
+    font-size: 15px;
+}
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+/**
+ * Grid layout
+ */
+
+.row,
+.content {
+    width: 100%;
+    background-color: #eee;
+    margin-right: auto;
+    margin-left: auto;
+}
+.row:after,
+.clear:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.content {
+    padding: 1.5rem;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #eee;
+}
+ul.row,
+ol.row {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+[class^="col"] {
+    margin-top: 0;
+    float: left;
+}
+.col-1-1 {
+    width: 100%;
+    float: none;
+}
+.col-1-2 {
+    width: 50%;
+}
+.move-right {
+    float: right;
+    padding-left: 0;
+}
+
+/* nest column with children columns */
+
+[class^="col"].nest {
+    padding-right: 0;
+    padding-bottom: 0;
+}
+
+/**
+ * Mobile
+ * Portrait and Landscape
+ */
+
+@media screen and (max-device-width: 767px) {
+    .row-padded {
+        padding: 1rem 0 0 1rem;
+    }
+    [class^="col"] {
+        padding-right: 1rem;
+        padding-bottom: 1rem;
+        margin-top: 0;
+    }
+    .move-right:not(:last-of-type) {
+        padding-right: 1rem;
+    }
+    ul.row,
+    ol.row {
+        margin: 0;
+    }
+    .col-1-3,
+    .col-2-3,
+    .col-3-4,
+    .col-1-1-sm {
+        width: 100%;
+        float: none;
+    }
+    .col-1-4,
+    .col-1-6,
+    .col-1-2-sm {
+        width: 50%;
+    }
+    .col-1-3-sm {
+        width: 33.333%;
+    }
+    .col-1-4-sm {
+        width: 25%;
+    }
+}
+
+/**
+ * iPad and up
+ */
+
+@media screen and (min-device-width: 768px) {
+    .col-1-3 {
+        width: 33.333%;
+    }
+    .col-2-3 {
+        width: 66.666%;
+    }
+    .col-1-4 {
+        width: 25%;
+    }
+    .col-3-4 {
+        width: 75%;
+    }
+    .col-1-6 {
+        width: 16.666%;
+    }
+}
+
+/**
+ * iPad
+ * Portrait
+ */
+
+@media screen and (min-device-width: 768px) and (max-device-width: 1023px) {
+    .row-padded {
+        padding: 1.5rem 0 1.5rem 1.5rem;
+    }
+    [class^="col"] {
+        padding-right: 1.5rem;
+    }
+    .move-right:not(:last-of-type) {
+        padding-right: 1.5rem;
+    }
+    .col-1-1-md {
+        width: 100%;
+    }
+    .col-1-2-md {
+        width: 50%;
+    }
+    .col-1-3-md {
+        width: 33%;
+    }
+    .col-1-4-md {
+        width: 25%;
+    }
+}
+
+/**
+ * Desktop
+ * iPad landscape
+ */
+
+@media screen and (min-device-width: 1024px) {
+    .row-padded {
+        padding: 2rem 0 2rem 2rem;
+    }
+    [class^="col"] {
+        padding-right: 2rem;
+    }
+    .move-right:not(:last-of-type) {
+        padding-right: 2rem;
+    }
+}

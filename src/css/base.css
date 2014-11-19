@@ -1,0 +1,28 @@
+/**
+ * Uniform margin top for all nested elements
+ */
+p {
+    margin: 0;
+}
+* + *,
+p + p {
+    margin-top: 1.5em;
+}
+body {
+    font-size: 1em;
+    line-height: 1.4em;
+}
+abbr,
+acronym {
+    border-bottom: 0.1em dotted;
+    cursor: help;
+}
+abbr:hover {
+    background-color: LemonChiffon;
+}
+ins {
+    background-color: PaleGreen;
+}
+del {
+    background-color: LightPink;
+}
