@@ -35,14 +35,6 @@ blockquote {
     font-style: italic;
     border-left: .8em solid #ccc;
 }
-blockquote p:before,
-blockquote p:after {
-    font-size: 4em;
-    line-height: 0.1em;
-    margin-right: 0.25em;
-    vertical-align: -0.4em;
-    color: #aaa;
-}
 blockquote p {
     display: inline;
 }
