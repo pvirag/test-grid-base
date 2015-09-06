@@ -2,38 +2,106 @@
  * Reset box sizing
  */
 
-html {
-    box-sizing: border-box;
-    font-size: 15px;
-}
 *,
-*:before,
-*:after {
-    box-sizing: inherit;
+*:after,
+*:before {
+    box-sizing: border-box;
+}
+.gr-row * {
+    margin: 0;
+}
+main,
+section,
+footer,
+header, {
+    width: 100%;
 }
 
 /**
  * Grid layout
+ *
+ * Breakpoints:
+ *     Small: max-device-width: 767px
+ *     Medium (useful for tablet in portrait mode): min-device-width: 768px and max-device-width: 1023px
+ *     Large: min-device-width: 1024px
+ *
+ * Gutters:
+ *     Large: 30px
+ *     Medium: 25px
+ *     Small: 15px
+ *
+ * Default column widths:
+ *     | name     | large   | medium  | small |
+ *     |======================================|
+ *     | .col-1-1 | 100%    | 100%    | 100%  |
+ *     | .col-1-2 | 50%     | 50%     | 50%   |
+ *     | .col-1-3 | 33.333% | 33.333% | 100%  |
+ *     | .col-2-3 | 66.666% | 66.666% | 100%  |
+ *     | .col-1-4 | 25%     | 25%     | 50%   |
+ *     | .col-3-4 | 75%     | 75%     | 100%  |
+ *     | .col-1-6 | 16.666% | 16.666% | 100%  |
+ *
+ * To change the default responsive settings of column widths as shown
+ * above for medium and small screen sizes, we can use special class names.
+ * Useful if 33% column on a large screen would render as 100% column on a
+ * small screen and we would want to change it to render as 33% column even
+ * on a small sreens. See details below:
+ *
+ * Mobile overrides:
+ *     Example: <li class="col-1-4 col-1-4-sm"> // force 25% width on small screen
+ *     .col-1-1-sm -> 100%
+ *     .col-1-2-sm -> 50%
+ *     .col-1-3-sm -> 33.333%
+ *     .col-1-4-sm -> 25%
+ *
+ * Tablet overrides:
+ *     Example: <li class="col-1-4 col-1-1-md"> // force 100% width on medium screen
+ *     .col-1-1-md -> 100%
+ *     .col-1-2-md -> 50%
+ *     .col-1-3-md -> 33.333%
+ *     .col-1-4-md -> 25%
+ *
+ * Content wrap:
+ *     .content class with 20px padding
+ *
+ * Unordered list as columns holder:
+ *     assign class .gr-row - it will disable bullets and padding
+ *
+ * Example with two 50% wide columns and content box that gives additional 20px padding:
+ *     <article class="gr-row row-padded">
+ *         <header class="col-1-1">
+ *             <h1>Example article with header and two columns</h1>
+ *         </header>
+ *         <section class="col-1-2">
+ *             <div class="content">
+ *                 ..your content..
+ *             </div>
+ *         </section>
+ *         <section class="col-1-2">
+ *             <div class="content">
+ *                 ..your content..
+ *             </div>
+ *         </section>
+ *     </article>
  */
 
 .row,
 .content {
     width: 100%;
-    background-color: #eee;
     margin-right: auto;
     margin-left: auto;
 }
 .row:after,
-.clear:after {
+.clearfix:after,
+.content:after {
     content: "";
     display: table;
     clear: both;
 }
 .content {
-    padding: 1.5rem;
-    background-color: #fff;
+    padding: 20px;
+    background-color: #ccc;
     border-radius: 5px;
-    border: 1px solid #eee;
 }
 ul.row,
 ol.row {
@@ -41,6 +109,13 @@ ol.row {
     padding: 0;
     margin-bottom: 0;
 }
+.row h1 ~ .subheader {
+    font-weight: normal;
+    font-size: 100%;
+}
+/*.row-padded {
+    max-width: 1200px;
+}*/
 [class^="col"] {
     margin-top: 0;
     float: left;
@@ -48,6 +123,7 @@ ol.row {
 .col-1-1 {
     width: 100%;
     float: none;
+    clear: both;
 }
 .col-1-2 {
     width: 50%;
@@ -56,12 +132,8 @@ ol.row {
     float: right;
     padding-left: 0;
 }
-
-/* nest column with children columns */
-
-[class^="col"].nest {
-    padding-right: 0;
-    padding-bottom: 0;
+.hidden {
+    display: none;
 }
 
 /**
@@ -69,17 +141,24 @@ ol.row {
  * Portrait and Landscape
  */
 
-@media screen and (max-device-width: 767px) {
-    .row-padded {
-        padding: 1rem 0 0 1rem;
+@media screen and (max-width: 767px) {
+    .row h1,
+    .row .subheader {
+        margin-bottom: 1.5em;
     }
+    .row-padded {
+        padding: 15px 0 0 15px;
+    }
+    .row-padded > *,
     [class^="col"] {
-        padding-right: 1rem;
-        padding-bottom: 1rem;
+        padding-right: 15px;
         margin-top: 0;
     }
+    [class^="col"] {
+        padding-bottom: 15px;
+    }
     .move-right:not(:last-of-type) {
-        padding-right: 1rem;
+        padding-right: 15px;
     }
     ul.row,
     ol.row {
@@ -103,13 +182,20 @@ ol.row {
     .col-1-4-sm {
         width: 25%;
     }
+    .hide-mobile {
+        display: none;
+    }
 }
 
 /**
  * iPad and up
  */
 
-@media screen and (min-device-width: 768px) {
+@media screen and (min-width: 768px) {
+    .row h1,
+    .row .subheader {
+        margin-bottom: 45px;
+    }
     .col-1-3 {
         width: 33.333%;
     }
@@ -125,6 +211,9 @@ ol.row {
     .col-1-6 {
         width: 16.666%;
     }
+    .hide-desktop {
+        display: none;
+    }
 }
 
 /**
@@ -132,15 +221,16 @@ ol.row {
  * Portrait
  */
 
-@media screen and (min-device-width: 768px) and (max-device-width: 1023px) {
+@media screen and (min-width: 768px) and (max-width: 1023px) {
     .row-padded {
-        padding: 1.5rem 0 1.5rem 1.5rem;
+        padding: 25px 0 25px 25px;
     }
+    .row-padded > *,
     [class^="col"] {
-        padding-right: 1.5rem;
+        padding-right: 25px;
     }
     .move-right:not(:last-of-type) {
-        padding-right: 1.5rem;
+        padding-right: 25px;
     }
     .col-1-1-md {
         width: 100%;
@@ -154,6 +244,9 @@ ol.row {
     .col-1-4-md {
         width: 25%;
     }
+    .hide-tablet {
+        display: none;
+    }
 }
 
 /**
@@ -161,14 +254,23 @@ ol.row {
  * iPad landscape
  */
 
-@media screen and (min-device-width: 1024px) {
+@media screen and (min-width: 1024px) {
     .row-padded {
-        padding: 2rem 0 2rem 2rem;
+        padding: 30px 0 30px 30px;
     }
+    .row-padded > *,
     [class^="col"] {
-        padding-right: 2rem;
+        padding-right: 30px;
     }
     .move-right:not(:last-of-type) {
-        padding-right: 2rem;
+        padding-right: 30px;
     }
+}
+
+/* nest column with children columns */
+
+[class^="col"].nest,
+.row.nest {
+    padding-right: 0;
+    padding-bottom: 0;
 }
